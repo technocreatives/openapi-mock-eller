@@ -1,0 +1,26 @@
+{
+  "name": "openapi-mock-eller",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "Brendan Molloy <brendan@technocreatives.com>",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.4.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-promise-router": "^3.0.1",
+    "faker": "^4.1.0",
+    "js-yaml": "^3.11.0",
+    "json-ref-lite": "^1.1.0",
+    "json-schema-faker": "^0.5.0-rc14",
+    "lodash": "^4.17.5",
+    "winston": "^3.0.0-rc4"
+  },
+  "devDependencies": {
+    "ava": "^1.0.0-beta.3"
+  }
+}
