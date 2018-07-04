@@ -2,6 +2,7 @@ const express = require('express')
 const router = require("express-promise-router")
 const _ = require("lodash")
 const fs = require("fs")
+const path = require("path")
 const jref = require("json-ref-lite")
 const yaml = require("js-yaml")
 const winston = require("winston")
@@ -164,6 +165,10 @@ class OpenApiServer {
     // TODO: this shit just doesn't work
     // this.app.use(require("express-formidable")())
     this.app.use("/", this.router)
+    
+    this.app.get('/docs/schema.json', (req, res) => res.json(this.schema))
+    this.app.get(['/docs/', '/docs/index.html'], (req, res) => res.sendFile(path.join(__dirname, 'docs.html')))
+    this.app.get('/docs/*', (req, res) => res.sendFile(path.join(__dirname, '..', 'node_modules', 'swagger-ui-dist', req.params[0])))
 
     this.app.use("/", (req, res) => {
       logger.info(`[404] ${req.originalUrl}`)
