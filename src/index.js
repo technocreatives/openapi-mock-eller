@@ -165,6 +165,29 @@ class OpenApiServer {
     // this.app.use(require("express-formidable")())
     this.app.use("/", this.router)
 
+    this.app.use("/", (req, res) => {
+      logger.info(`[404] ${req.originalUrl}`)
+      return res
+        .status(404)
+        .json({
+          error: {
+            message: "Not found",
+          }
+        })
+    })
+
+    this.app.use((err, req, res, next) => {
+      logger.error(`[500] ${err}`)
+      return res
+        .status(err.status || 500)
+        .json({
+          error: {
+            message: err.message,
+            stack: err.stack,
+          }
+        })
+    })
+
     // Import the routes
     for (const path in this.schema.paths) {
       const pathValue = this.schema.paths[path]
